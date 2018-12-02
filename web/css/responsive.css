@@ -1,0 +1,79 @@
+@media screen and (max-width: 768px) {
+ul.menu-list {
+    padding-left: 0;
+}
+.logo, .text-wrap, .header.container, .flex-wrap.main-img, .max-width .text-light03, .flex-wrap.text-box, .footer-sect, ul.menu-list {
+    padding-bottom: 20px;
+}
+.slider-box.active {
+    margin-bottom: 40px;
+}
+.partner-box {
+	padding: 20px;
+}
+.flex-wrap.text-box .text-light03, .footer .container.flex.space-between {
+    padding: 20px 0;
+}
+.text-wrap, .calculator-wrap, .flex-wrap.text-box, .images-box, .text-box {
+    width: 100%;
+    padding-right: 0;
+}
+.flex-wrap.container, .max-width {
+    padding: 0 15px 50px 15px;
+}
+.flex-wrap.main-img:nth-child(2n) .flex-wrap.text-box {
+	padding: 0;
+}
+.title-center {
+    padding: 0px 0 50px 0;
+    text-align: center;
+}
+section.content, .flex-wrap.text-box:last-child{
+    margin-top: 0px;
+}
+.calculator {
+    max-width: 100%;
+}
+section.content {
+    margin-top: 40px;
+}
+.slider-box {
+    display: none;
+}
+.slider-box.active {
+    display: flex;
+}
+.flex-wrap.container.space-between {
+    justify-content: center;
+}
+.flex-wrap.main-img:nth-child(2n+1) {
+    flex-wrap: wrap-reverse;
+}
+.main-slide .flex-wrap.container, .max-width {
+    padding: 0 15px 50px 15px;
+}
+.container.flex.space-between {
+    flex-direction: column;
+    align-items: start;
+    padding: 20px 15px !important;
+}
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+
+}
+@media screen and (max-width: 414px){
+	
+
+  
+}
+@media screen and (max-width: 1000px){
+button.button-wrap {
+    margin-left: 0;
+    margin-top: 20px;
+}
+.menu-wrap {
+    padding-bottom: 40px;
+}
+
+}
