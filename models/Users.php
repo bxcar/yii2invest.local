@@ -43,6 +43,7 @@ class Users extends \yii\db\ActiveRecord
             'id' => 'ID',
             'phone' => 'Phone',
             'email' => 'Email',
+            'age' => 'Возраст',
         ];
     }
 }

@@ -1,5 +1,9 @@
 <?php
+
 use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+
 ?>
 <div class="wrap">
     <nav>
@@ -12,17 +16,23 @@ use yii\helpers\Url;
         </ul>
 
         <ul class="btns">
-            <li><button onclick="" class="blue">Получить займ</button></li>
-            <li><button onclick="" class="green">Инвестировать</button></li>
-<!--            <li><button onclick="">Выйти</button></li>-->
-            <li><a href="<?= Url::to(['site/logout'])?>" data-method="post">Выйти</a></li>
+            <li>
+                <button onclick="" class="blue">Получить займ</button>
+            </li>
+            <li>
+                <button onclick="" class="green">Инвестировать</button>
+            </li>
+            <!--            <li><button onclick="">Выйти</button></li>-->
+            <li><a href="<?= Url::to(['site/logout']) ?>" data-method="post">Выйти</a></li>
         </ul>
     </nav>
 
     <!-- # Статусбар-->
 
     <div class="status" id="status">
-        <div class="progress"><div style="width:50%"></div></div>
+        <div class="progress">
+            <div style="width:50%"></div>
+        </div>
         <div class="txt">
             <div style="left:0;">Прогресс профиля</div>
             <div style="left:50%;" class="green">Прогресс профиля</div>
@@ -78,7 +88,6 @@ use yii\helpers\Url;
     <!-- ///////////#1 Страница карты-->
 
 
-
     <!-- #2 Страница приложений-->
     <!--<main>
         <aside>
@@ -129,74 +138,65 @@ use yii\helpers\Url;
 
         <section class="steps">
             <h2>Личные данные</h2>
-            <div class="txt">Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и так далее</div>
+            <div class="txt">Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были
+                спокойны и так далее
+            </div>
 
 
-            <form action="" method="POST" name="">
-                <div id="step1">
-                    <div class="col">
-                        <span>Возраст</span>
-                        <select name="age">
-                            <option value="0" disabled selected>Выбрать</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                        </select>
-                    </div>
+            <?php $form = ActiveForm::begin(['id' => 'register-form-cabinet']); ?>
+            <div id="step1">
 
-                    <div class="col">
-                        <span>Пол</span>
-                        <select name="malefemale">
-                            <option value="0" disabled selected>Выбрать</option>
-                            <option value="male">Мужской</option>
-                            <option value="female">Женский</option>
-                        </select>
-                    </div>
-
-                    <div class="col">
-                        <span>Семейный статус</span>
-                        <select name="status">
-                            <option value="0" disabled selected>Выбрать</option>
-                            <option value="married">Состою в браке</option>
-                            <option value="nomarried">Не состою в браке</option>
-                        </select>
-                    </div>
-
-                    <div class="col">
-                        <span>Количество членов семьи</span>
-                        <select name="familymembers">
-                            <option value="0" disabled selected>Выбрать</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-
-                    <div class="col">
-                        <span>Количество детей</span>
-                        <select name="children">
-                            <option value="0" disabled selected>Выбрать</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-
-                    <div class="col">
-<!--                        error-->
-                        <span>Образование <!--<span class="error">Ошибка</span>--></span>
-                        <select name="education">
-                            <option value="0" disabled selected>Выбрать</option>
-                            <option value="higher">Высшее</option>
-                            <option value="incompletehigher">Неоконченное высшее</option>
-                            <option value="secondary">Среднее</option>
-                        </select>
-                    </div>
+                <div class="col">
+                <?= $form->field($model, 'age')->dropDownList([
+                    '0' => 'Выбрать',
+                    '20' => '20',
+                    '30' => '30',
+                    '40' => '40'
+                ]); ?>
                 </div>
+                <div class="col">
+                    <?= $form->field($model, 'malefemale')->dropDownList([
+                        '0' => 'Выбрать',
+                        'Мужской' => 'Мужской',
+                        'Женский' => 'Женский'
+                    ]); ?>
+                </div>
+                <div class="col">
+                    <?= $form->field($model, 'status')->dropDownList([
+                        '0' => 'Выбрать',
+                        'Сосотою в брак' => 'Сосотою в браке',
+                        'Не состою в браке' => 'Не состою в браке',
+                    ]); ?>
+                </div>
+                <div class="col">
+                    <?= $form->field($model, 'familymembers')->dropDownList([
+                        '0' => 'Выбрать',
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4',
+                        '5' => '5'
+                    ]); ?>
+                </div>
+                <div class="col">
+                    <?= $form->field($model, 'children')->dropDownList([
+                        '0' => 'Выбрать',
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4',
+                        '5' => '5'
+                    ]); ?>
+                </div>
+                <div class="col">
+                    <?= $form->field($model, 'education')->dropDownList([
+                        '0' => 'Выбрать',
+                        'Высше' => 'Высшее',
+                        'Неоконченное высше' => 'Неоконченное высшее',
+                        'Среднее' => 'Среднее'
+                    ]); ?>
+                </div>
+
 
                 <div class="paginator">
                     <button onclick="">< Назад</button>
@@ -209,9 +209,12 @@ use yii\helpers\Url;
                         <li></li>
                     </ul>
 
-                    <button onclick="">Далее ></button>
+                    <?= Html::submitButton('Далее >', ['class' => '']) ?>
                 </div>
-            </form>
+
+            </div>
+
+            <?php ActiveForm::end(); ?>
 
         </section>
     </main>
@@ -253,7 +256,6 @@ use yii\helpers\Url;
         </section>
     </main>-->
     <!-- ///////////#4 ФОтографии паспорта-->
-
 
 
     <!-- #5 заявка на займ-->

@@ -65,7 +65,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
-//            return $this->goHome();
             return $this->redirect(['site/cabinet']);
         }
 
@@ -74,24 +73,31 @@ class SiteController extends Controller
             $user = new UserIdentity();
             $user->email = $model->email;
             $user->phone = $model->phone;
-            $user->auth_key = '1';
-            $user->access_token = '1';
+            $user->auth_key = '0';
+            $user->access_token = '0';
+            $user->age = '0';
+            $user->malefemale = '0';
+            $user->status = '0';
+            $user->familymembers = '0';
+            $user->children = '0';
+            $user->education = '0';
             if($user->save()){
                 $user->setUpUser($user->phone); // id of user
                 Yii::$app->user->login($user);
+
+                $cookies = Yii::$app->response->cookies;
+                $cookies->add(new \yii\web\Cookie([
+                    'name' => 'user_phone',
+                    'value' => $model->phone,
+                ]));
+
                 return $this->redirect(['site/cabinet']);
             }
         }
-        /*if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }*/
 
-//        $model->phone = '';
         return $this->render('index', [
             'model' => $model,
         ]);
-
-//        return $this->render('index');
     }
 
     /**
@@ -161,26 +167,26 @@ class SiteController extends Controller
         $this->layout = 'basic';
 
         $model = new SignupFormCabinet();
-        if($model->load(\Yii::$app->request->post()) && $model->validate()){
-            $user = new UserIdentity();
-            $user->age = $model->age;
-            $user->phone = $model->phone;
-            if($user->save()){
-                $user->setUpUser($user->phone); // id of user
-                Yii::$app->user->login($user);
-                return $this->redirect(['site/cabinet']);
-            }
-        }
-        /*if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }*/
 
-//        $model->phone = '';
+        $cookies = Yii::$app->request->cookies;
+        $user_phone = $cookies->getValue('user_phone');
+
+        if($model->load(\Yii::$app->request->post())  && $model->validate()){
+            \Yii::$app->db->createCommand("UPDATE users SET age=:age, malefemale=:malefemale, status=:status, familymembers=:familymembers, children=:children, education=:education WHERE phone=:user_phone")
+                ->bindValue(':user_phone', $user_phone)
+                ->bindValue(':age', $model->age)
+                ->bindValue(':malefemale', $model->malefemale)
+                ->bindValue(':status', $model->status)
+                ->bindValue(':familymembers', $model->familymembers)
+                ->bindValue(':children', $model->children)
+                ->bindValue(':education', $model->education)
+                ->execute();
+        }
+
         return $this->render('cabinet', [
             'model' => $model,
         ]);
 
-//        return $this->render('cabinet');
     }
 
     public function actionSignup(){
@@ -192,10 +198,16 @@ class SiteController extends Controller
             $user = new UserIdentity();
             $user->email = $model->email;
             $user->phone = $model->phone;
-            $user->auth_key = '1';
-            $user->access_token = '1';
+            $user->auth_key = '0';
+            $user->access_token = '0';
+            $user->age = '0';
+            $user->malefemale = '0';
+            $user->status = '0';
+            $user->familymembers = '0';
+            $user->children = '0';
+            $user->education = '0';
             if($user->save()){
-                $user->setUpUser($user->phone); // id of user
+                $user->setUpUser($user->phone);
                 Yii::$app->user->login($user);
                 return $this->redirect(['site/cabinet']);
             }

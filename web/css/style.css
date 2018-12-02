@@ -269,3 +269,7 @@ footer a.logo{display:block; position:absolute; left:20px; top:20px; width:85px;
 main>section{padding:20px 20px;}
 }
 
+#register-form-cabinet .control-label {
+    font-size: 14px;
+}
+

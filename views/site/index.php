@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]); ?>
                     <div class="flex-wrap-columns">
-                        <input placeholder="+375 29 111 11 11" type="password" id="signupform-phone" class="form-control phone" name="SignupForm[phone]"
+                        <input placeholder="+375 29 111 11 11" id="signupform-phone" class="form-control phone" name="SignupForm[phone]"
                                aria-required="true">
                         <input placeholder="Алексей Иванович" type="text" id="signupform-email" class="form-control name" name="SignupForm[email]"
                                aria-required="true">
@@ -190,7 +190,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]); ?>
                     <div class="flex-wrap-columns">
-                        <input placeholder="+375 29 111 11 11" type="password" id="signupform1-phone" class="form-control phone" name="SignupForm[phone]"
+                        <input placeholder="+375 29 111 11 11" id="signupform1-phone" class="form-control phone" name="SignupForm[phone]"
                                aria-required="true">
                         <input placeholder="Алексей Иванович" type="text" id="signupform1-email" class="form-control name" name="SignupForm[email]"
                                aria-required="true">
