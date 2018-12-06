@@ -31,7 +31,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="status" id="status">
         <div class="progress">
-            <div style="width:50%"></div>
+            <div style="width:0"></div>
         </div>
         <div class="txt">
             <div style="left:0;">Прогресс профиля</div>
@@ -127,11 +127,10 @@ use yii\bootstrap\ActiveForm;
     <main>
         <aside>
             <ul>
-                <li class="done">ФИО</li>
-                <li class="done">Личные данные</li>
+                <li>Личные данные</li>
                 <li>Кредитный отчет</li>
-                <li>Фотография пасспорта</li>
                 <li>Привязать карту</li>
+                <li>Фотография пасспорта</li>
                 <li>Подать заявку</li>
             </ul>
         </aside>
@@ -199,11 +198,11 @@ use yii\bootstrap\ActiveForm;
 
 
                 <div class="paginator">
-                    <button onclick="">< Назад</button>
+                    <button onclick="" disabled>< Назад</button>
 
                     <ul>
-                        <li></li>
                         <li class="current"></li>
+                        <li></li>
                         <li></li>
                         <li></li>
                         <li></li>

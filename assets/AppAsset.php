@@ -24,11 +24,6 @@ class AppAsset extends AssetBundle
         'css/template2.css',
         'css/responsive2.css',
         'css/jquery-ui2.css',
-//        'css/hamburgers.css',
-//        'css/hamburgers2.css',
-//        'css/jquery-ui.css',
-//        'css/responsive.css',
-//        'css/template.css',
     ];
     public $js = [
     ];

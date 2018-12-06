@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\SignupFormCabinetcardbinding;
 use app\models\UserIdentity;
 use Yii;
 use yii\filters\AccessControl;
@@ -11,8 +12,10 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\SignupForm;
 use app\models\SignupFormCabinet;
+use app\models\SignupFormCabinetpassport;
 use app\models\ContactForm;
 
+use yii\web\UploadedFile;
 class SiteController extends Controller
 {
     /**
@@ -181,11 +184,65 @@ class SiteController extends Controller
                 ->bindValue(':children', $model->children)
                 ->bindValue(':education', $model->education)
                 ->execute();
+
+            return $this->redirect(['site/cabinetcreditreport']);
         }
 
         return $this->render('cabinet', [
             'model' => $model,
         ]);
+
+    }
+
+    public function actionCabinetcreditreport()
+    {
+        $this->layout = 'basic';
+
+        return $this->render('cabinetcreditreport');
+    }
+
+    public function actionCabinetcardbinding()
+    {
+        $this->layout = 'basic';
+
+        $model = new SignupFormCabinetcardbinding();
+
+        $cookies = Yii::$app->request->cookies;
+        $user_phone = $cookies->getValue('user_phone');
+
+        if($model->load(\Yii::$app->request->post())  && $model->validate()){
+            \Yii::$app->db->createCommand("UPDATE users SET card_number=:card_number, card_month=:card_month, card_year=:card_year, card_holder_name=:card_holder_name, card_cvv=:card_cvv WHERE phone=:user_phone")
+                ->bindValue(':user_phone', $user_phone)
+                ->bindValue(':card_number', $model->card_number)
+                ->bindValue(':card_month', $model->card_month)
+                ->bindValue(':card_year', $model->card_year)
+                ->bindValue(':card_holder_name', $model->card_holder_name)
+                ->bindValue(':card_cvv', $model->card_cvv)
+                ->execute();
+
+            return $this->redirect(['site/cabinetpassport']);
+        }
+
+        return $this->render('cabinetcardbinding', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCabinetpassport()
+    {
+        $this->layout = 'basic';
+
+        $model = new SignupFormCabinetpassport();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                return;
+            }
+        }
+
+        return $this->render('cabinetpassport', ['model' => $model]);
 
     }
 
