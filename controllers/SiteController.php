@@ -13,7 +13,9 @@ use app\models\LoginForm;
 use app\models\SignupForm;
 use app\models\SignupFormCabinet;
 use app\models\SignupFormCabinetpassport;
+use app\models\SignupFormRequest;
 use app\models\ContactForm;
+use yii\helpers\Url;
 
 use yii\web\UploadedFile;
 class SiteController extends Controller
@@ -76,6 +78,8 @@ class SiteController extends Controller
             $user = new UserIdentity();
             $user->email = $model->email;
             $user->phone = $model->phone;
+            $user->term = $model->term;
+            $user->sum = $model->sum;
             $user->auth_key = '0';
             $user->access_token = '0';
             $user->age = '0';
@@ -84,6 +88,8 @@ class SiteController extends Controller
             $user->familymembers = '0';
             $user->children = '0';
             $user->education = '0';
+            $user->passport1 = '0';
+            $user->passport2 = '0';
             if($user->save()){
                 $user->setUpUser($user->phone); // id of user
                 Yii::$app->user->login($user);
@@ -234,15 +240,62 @@ class SiteController extends Controller
 
         $model = new SignupFormCabinetpassport();
 
-        if (Yii::$app->request->isPost) {
+        $cookies = Yii::$app->request->cookies;
+        $user_phone = $cookies->getValue('user_phone');
+
+        if(Yii::$app->request->post())
+        {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
-                // file is uploaded successfully
-                return;
+            $model->imageFile2 = UploadedFile::getInstance($model, 'imageFile2');
+            if ($model->validate()) {
+                $path = Yii::$app->params['pathUploads'] . 'uploads/';
+                $model->imageFile->saveAs( $path . $model->imageFile);
+                $model->imageFile2->saveAs( $path . $model->imageFile2);
+
+                \Yii::$app->db->createCommand("UPDATE users SET passport1=:passport1, passport2=:passport2 WHERE phone=:user_phone")
+                    ->bindValue(':user_phone', $user_phone)
+                    ->bindValue(':passport1', '/web/' . $path . $model->imageFile)
+                    ->bindValue(':passport2', '/web/' . $path . $model->imageFile2)
+                    ->execute();
             }
         }
 
         return $this->render('cabinetpassport', ['model' => $model]);
+
+    }
+
+    public function actionCabinetrequest()
+    {
+        $this->layout = 'basic';
+
+        $model = new SignupFormRequest();
+
+        $cookies = Yii::$app->request->cookies;
+        $user_phone = $cookies->getValue('user_phone');
+
+        if($model->load(\Yii::$app->request->post())  && $model->validate()) {
+            \Yii::$app->db->createCommand("UPDATE users SET term=:term, sum=:sum WHERE phone=:user_phone")
+                ->bindValue(':user_phone', $user_phone)
+                ->bindValue(':term', $model->term)
+                ->bindValue(':sum', $model->sum)
+                ->execute();
+        }
+
+        $row_term = (new \yii\db\Query())
+            ->select(['term'])
+            ->from('users')
+            ->where(['phone' => $user_phone])
+            ->limit(1)
+            ->all();
+
+        $row_sum = (new \yii\db\Query())
+            ->select(['sum'])
+            ->from('users')
+            ->where(['phone' => $user_phone])
+            ->limit(1)
+            ->all();
+
+        return $this->render('cabinetrequest', compact('row_term', 'row_sum', 'model'));
 
     }
 
@@ -263,6 +316,8 @@ class SiteController extends Controller
             $user->familymembers = '0';
             $user->children = '0';
             $user->education = '0';
+            $user->passport1 = '0';
+            $user->passport2 = '0';
             if($user->save()){
                 $user->setUpUser($user->phone);
                 Yii::$app->user->login($user);

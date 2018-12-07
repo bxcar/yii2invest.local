@@ -79,6 +79,12 @@ AppAsset2::register($this);
         </div>
     </div>
 </footer>
+<script>
+    $( "#term-sum-form .click-link" ).click(function() {
+        $('#term-sum-form .hide-on-click').css('display', 'none');
+        $('#term-sum-form input').css('display', 'inline-block');
+    });
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>

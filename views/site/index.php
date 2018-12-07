@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div class="flex-wrap justify-center"><span class="text-light">Время вклада</span></div>
                     <div class="flex-wrap justify-center"><span class="text-light03 black"
-                                                                id="duration1">4 000&nbsp;</span><span
+                                                                id="duration1">4 000</span>&nbsp;<span
                                 class="text-light03 grey02">BYN</span></div>
                     <div class="rangeslider__labels slider">
                         <div id="slider"></div>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div class="flex-wrap justify-center"><span class="text-light">Срок займа</span></div>
                     <div class="flex-wrap justify-center"><span class="text-light03 black"
-                                                                id="duration2">10&nbsp;</span><span
+                                                                id="duration2">10</span>&nbsp;<span
                                 class="text-light03 grey02">дней</span></div>
                     <div class="rangeslider__labels slider2">
                         <div id="slider2"></div>
@@ -59,6 +59,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]); ?>
                     <div class="flex-wrap-columns">
+                        <input type="hidden" id="signupform-term" class="form-control term" name="SignupForm[term]"
+                               aria-required="true">
+                        <input type="hidden" id="signupform-sum" class="form-control sum" name="SignupForm[sum]"
+                               aria-required="true">
                         <input placeholder="+375 29 111 11 11" id="signupform-phone" class="form-control phone" name="SignupForm[phone]"
                                aria-required="true">
                         <input placeholder="Алексей Иванович" type="text" id="signupform-email" class="form-control name" name="SignupForm[email]"
@@ -190,6 +194,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]); ?>
                     <div class="flex-wrap-columns">
+                        <input type="hidden" id="signupform1-term" class="form-control term" name="SignupForm[term]"
+                               aria-required="true">
+                        <input type="hidden" id="signupform1-sum" class="form-control sum" name="SignupForm[sum]"
+                               aria-required="true">
                         <input placeholder="+375 29 111 11 11" id="signupform1-phone" class="form-control phone" name="SignupForm[phone]"
                                aria-required="true">
                         <input placeholder="Алексей Иванович" type="text" id="signupform1-email" class="form-control name" name="SignupForm[email]"

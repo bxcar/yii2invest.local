@@ -138,6 +138,27 @@ AppAsset::register($this);
         $( "#slider5" ).slider();
     } );
 </script>
+<script>
+    $('#signupform-term').attr('value', $('#duration2').html());
+    $("body").on('DOMSubtreeModified', "#duration2", function() {
+        $('#signupform-term').attr('value', $('#duration2').html());
+    });
+
+    $('#signupform1-term').attr('value', $('#duration3').html());
+    $("body").on('DOMSubtreeModified', "#duration3", function() {
+        $('#signupform1-term').attr('value', $('#duration3').html());
+    });
+
+    $('#signupform-sum').attr('value', $('#duration1').html());
+    $("body").on('DOMSubtreeModified', "#duration1", function() {
+        $('#signupform-sum').attr('value', $('#duration1').html());
+    });
+
+    $('#signupform1-sum').attr('value', $('#duration4').html());
+    $("body").on('DOMSubtreeModified', "#duration4", function() {
+        $('#signupform1-sum').attr('value', $('#duration4').html());
+    });
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>

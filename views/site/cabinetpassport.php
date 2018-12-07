@@ -3,6 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
 //use yii\widgets\ActiveForm;
 
 ?>
@@ -56,43 +57,160 @@ use yii\bootstrap\ActiveForm;
 
         <section>
             <h2>Фотографии пасспорта</h2>
-            <div class="txt">Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и так далее</div>
+            <div class="txt">Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были
+                спокойны и так далее
+            </div>
 
-            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+            <?php $form = ActiveForm::begin([
+                'options' => ['enctype' => 'multipart/form-data'],
+                'id' => 'register-form-cabinetpassport',
+                'fieldConfig' => [
+                    'options' => [
+                        'tag' => false,
+                    ],
+                ],
+            ]) ?>
 
             <ul class="photos">
                 <li>
-                    <div class="img"><img src="/web/images/photo.png" alt="" /></div>
+                    <div class="img">
+                        <?php if ($model->imageFile) { ?>
+                            <img style="width: 121px; height: 95px; object-fit: cover;"
+                                 src="/web/uploads/<?= $model->imageFile ?>" alt="">
+                        <?php } else { ?>
+                            <img src="/web/images/photo.png" alt=""/>
+                        <?php } ?>
+                    </div>
                     <h3>Фото 33-ей страницы пасспорта</h3>
-                    <p>Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и так далее</p>
-<!--                    <button onclick="" class="edit">Изменить</button>-->
-                    <?= $form->field($model, 'imageFile')->fileInput() ?>
+                    <p>Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и
+                        так далее</p>
+                    <?= $form->field($model, 'imageFile')->fileInput()->label('Загрузить') ?>
                 </li>
                 <li>
-                    <div class="img"><img src="/web/images/photo.png" alt="" /></div>
+                    <div class="img"><?php if ($model->imageFile2) { ?>
+                            <img style="width: 121px; height: 95px; object-fit: cover;"
+                                 src="/web/uploads/<?= $model->imageFile2 ?>" alt="">
+                        <?php } else { ?>
+                            <img src="/web/images/photo.png" alt=""/>
+                        <?php } ?></div>
                     <h3>Фото лица на фоне пасспорта</h3>
-                    <p>Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и так далее</p>
-                    <button onclick="" class="loader">Загрузить</button>
+                    <p>Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и
+                        так далее</p>
+                    <?= $form->field($model, 'imageFile2')->fileInput()->label('Загрузить') ?>
                 </li>
             </ul>
 
-            <?php ActiveForm::end() ?>
-            <!--<ul class="photos">
-                <li>
-                    <div class="img"><img src="/web/images/photo.png" alt="" /></div>
-                    <h3>Фото 33-ей страницы пасспорта</h3>
-                    <p>Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и так далее</p>
-                    <button onclick="" class="edit">Изменить</button>
-                </li>
-                <li>
-                    <div class="img"><img src="/web/images/photo.png" alt="" /></div>
-                    <h3>Фото лица на фоне пасспорта</h3>
-                    <p>Для скоринговой оценки вашего чего то там и банки и всякое такое, ну тип что бы были спокойны и так далее</p>
-                    <button onclick="" class="loader">Загрузить</button>
-                </li>
-            </ul>-->
+            <?= Html::submitButton('Готово', ['class' => 'long']) ?>
 
-            <button onclick="" class="long">Готово</button>
+            <div class="paginator" style="margin-top: 40px;">
+                <button onclick="redirectBack()" class="back">< Назад</button>
+
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li class="current"></li>
+                    <li></li>
+                </ul>
+
+                <button onclick="redirectTo()" class="back">Далее ></button>
+            </div>
+
+            <script>
+                function redirectBack() {
+                    window.location = "/cabinetcardbinding";
+                }
+
+                function redirectTo() {
+                    window.location = "/cabinetrequest";
+                }
+            </script>
+
+            <style>
+                #register-form-cabinetpassport label[for="signupformcabinetpassport-imagefile"],
+                #register-form-cabinetpassport label[for="signupformcabinetpassport-imagefile2"] {
+                    display: block;
+                    width: 200px;
+                    height: 65px;
+                    text-decoration: none;
+                    color: #fff;
+                    text-align: center;
+                    padding: 20px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 3px;
+                    border: none;
+                    background: #3c424d;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    margin-top: -33px;
+                    cursor: pointer;
+                }
+
+                #register-form-cabinetpassport label[for="signupformcabinetpassport-imagefile"]:hover,
+                #register-form-cabinetpassport label[for="signupformcabinetpassport-imagefile2"]:hover {
+                    background: #ebeced;
+                    color: #32394d;
+                }
+
+                #register-form-cabinetpassport input {
+                    display: none;
+                }
+
+                .paginator {
+                    margin: 40px 0 0 0;
+                    height: 65px;
+                    text-align: center;
+                }
+
+                .paginator ul {
+                    display: inline-block;
+                    vertical-align: top;
+                    margin: 25px 0;
+                    padding: 0;
+                    list-style: none;
+                }
+
+                .paginator ul li {
+                    display: inline-block;
+                    cursor: pointer;
+                    background: #ebeced;
+                    vertical-align: top;
+                    width: 10px;
+                    height: 10px;
+                    margin: 5px;
+                    border-radius: 5px;
+                }
+
+                .paginator ul li.current {
+                    background: #3c424d;
+                }
+
+                .paginator button {
+                    float: left;
+                    transition: 0.5s;
+                    font-size: 18px;
+                    color: #fff;
+                    font-weight: bold;
+                    width: 145px;
+                    height: 65px;
+                    border-radius: 5px;
+                    border: none;
+                    background: #3c424d;
+                }
+
+                .paginator button:last-child {
+                    float: right;
+                }
+
+                .paginator button:hover {
+                    background: #ebeced;
+                    color: #32394d;
+                }
+            </style>
+
+            <?php ActiveForm::end() ?>
         </section>
     </main>
     <!-- ///////////#4 ФОтографии паспорта-->

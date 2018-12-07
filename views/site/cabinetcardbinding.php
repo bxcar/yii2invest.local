@@ -91,7 +91,7 @@ use yii\bootstrap\ActiveForm;
 
 
                     <div class="paginator" style="margin-top: 100px;">
-                        <button onclick="redirectBack()" class="back">< Назад</button>
+                        <div onclick="redirectBack()" class="back">< Назад</div>
 
                         <ul>
                             <li></li>
@@ -109,6 +109,28 @@ use yii\bootstrap\ActiveForm;
                 <style>
                     #register-form-cabinetcardbinding .help-block {
                         display: none;
+                    }
+
+                    .back {
+                        float: left;
+                        transition: 0.5s;
+                        font-size: 18px;
+                        color: #fff;
+                        font-weight: bold;
+                        width: 145px;
+                        height: 65px;
+                        border-radius: 5px;
+                        border: none;
+                        background: #3c424d;
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .back:hover {
+                        background: #ebeced;
+                        color: #32394d;
                     }
                 </style>
 
